@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { Loader2 } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
-import { LoadingAgent } from '@/components/ui/loading-agent'
 import { useWorkflowRegistry } from '@/stores/workflows/registry/store'
 
 export default function WorkflowsPage() {
@@ -60,7 +60,7 @@ export default function WorkflowsPage() {
     <div className='flex h-screen items-center justify-center'>
       <div className='text-center'>
         <div className='mx-auto mb-4'>
-          <LoadingAgent size='lg' />
+          <Loader2 className='h-8 w-8 animate-spin text-muted-foreground' />
         </div>
       </div>
     </div>
