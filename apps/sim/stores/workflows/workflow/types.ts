@@ -77,7 +77,6 @@ export interface BlockState {
   outputs: Record<string, BlockOutput>
   enabled: boolean
   horizontalHandles?: boolean
-  isWide?: boolean
   height?: number
   advancedMode?: boolean
   triggerMode?: boolean
@@ -172,7 +171,6 @@ export interface WorkflowActions {
     blockProperties?: {
       enabled?: boolean
       horizontalHandles?: boolean
-      isWide?: boolean
       advancedMode?: boolean
       triggerMode?: boolean
       height?: number
@@ -190,8 +188,6 @@ export interface WorkflowActions {
   duplicateBlock: (id: string) => void
   toggleBlockHandles: (id: string) => void
   updateBlockName: (id: string, name: string) => boolean
-  toggleBlockWide: (id: string) => void
-  setBlockWide: (id: string, isWide: boolean) => void
   setBlockAdvancedMode: (id: string, advancedMode: boolean) => void
   setBlockTriggerMode: (id: string, triggerMode: boolean) => void
   updateBlockLayoutMetrics: (id: string, dimensions: { width: number; height: number }) => void

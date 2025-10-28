@@ -108,7 +108,6 @@ export async function POST(request: NextRequest, { params }: { params: Promise<{
             positionY: block.position?.y?.toString() || '0',
             enabled: block.enabled !== false,
             horizontalHandles: block.horizontalHandles !== false,
-            isWide: block.isWide || false,
             advancedMode: block.advancedMode || false,
             height: block.height?.toString() || '0',
             subBlocks: block.subBlocks || {},

@@ -163,7 +163,6 @@ export function useCollaborativeWorkflow() {
                 {
                   enabled: payload.enabled,
                   horizontalHandles: payload.horizontalHandles,
-                  isWide: payload.isWide,
                   advancedMode: payload.advancedMode,
                   triggerMode: payload.triggerMode ?? false,
                   height: payload.height,
@@ -253,9 +252,6 @@ export function useCollaborativeWorkflow() {
             case 'update-parent':
               workflowStore.updateParentId(payload.id, payload.parentId, payload.extent)
               break
-            case 'update-wide':
-              workflowStore.setBlockWide(payload.id, payload.isWide)
-              break
             case 'update-advanced-mode':
               workflowStore.setBlockAdvancedMode(payload.id, payload.advancedMode)
               break
@@ -281,7 +277,6 @@ export function useCollaborativeWorkflow() {
                 {
                   enabled: payload.enabled,
                   horizontalHandles: payload.horizontalHandles,
-                  isWide: payload.isWide,
                   advancedMode: payload.advancedMode,
                   triggerMode: payload.triggerMode ?? false,
                   height: payload.height,
@@ -697,7 +692,6 @@ export function useCollaborativeWorkflow() {
           outputs: {},
           enabled: true,
           horizontalHandles: true,
-          isWide: false,
           advancedMode: false,
           triggerMode: triggerMode || false,
           height: 0,
@@ -781,7 +775,6 @@ export function useCollaborativeWorkflow() {
         outputs,
         enabled: true,
         horizontalHandles: true,
-        isWide: false,
         advancedMode: false,
         triggerMode: isTriggerMode,
         height: 0, // Default height, will be set by the UI
@@ -908,22 +901,6 @@ export function useCollaborativeWorkflow() {
     (id: string, parentId: string, extent: 'parent') => {
       executeQueuedOperation('update-parent', 'block', { id, parentId, extent }, () =>
         workflowStore.updateParentId(id, parentId, extent)
-      )
-    },
-    [executeQueuedOperation, workflowStore]
-  )
-
-  const collaborativeToggleBlockWide = useCallback(
-    (id: string) => {
-      // Get the current state before toggling
-      const currentBlock = workflowStore.blocks[id]
-      if (!currentBlock) return
-
-      // Calculate the new isWide value
-      const newIsWide = !currentBlock.isWide
-
-      executeQueuedOperation('update-wide', 'block', { id, isWide: newIsWide }, () =>
-        workflowStore.toggleBlockWide(id)
       )
     },
     [executeQueuedOperation, workflowStore]
@@ -1197,7 +1174,6 @@ export function useCollaborativeWorkflow() {
         extent: sourceBlock.data?.extent || null,
         enabled: sourceBlock.enabled ?? true,
         horizontalHandles: sourceBlock.horizontalHandles ?? true,
-        isWide: sourceBlock.isWide ?? false,
         advancedMode: sourceBlock.advancedMode ?? false,
         triggerMode: sourceBlock.triggerMode ?? false,
         height: sourceBlock.height || 0,
@@ -1214,7 +1190,6 @@ export function useCollaborativeWorkflow() {
         {
           enabled: sourceBlock.enabled,
           horizontalHandles: sourceBlock.horizontalHandles,
-          isWide: sourceBlock.isWide,
           advancedMode: sourceBlock.advancedMode,
           triggerMode: sourceBlock.triggerMode ?? false,
           height: sourceBlock.height,
@@ -1233,7 +1208,6 @@ export function useCollaborativeWorkflow() {
           {
             enabled: sourceBlock.enabled,
             horizontalHandles: sourceBlock.horizontalHandles,
-            isWide: sourceBlock.isWide,
             advancedMode: sourceBlock.advancedMode,
             triggerMode: sourceBlock.triggerMode ?? false,
             height: sourceBlock.height,
@@ -1517,7 +1491,6 @@ export function useCollaborativeWorkflow() {
     collaborativeRemoveBlock,
     collaborativeToggleBlockEnabled,
     collaborativeUpdateParentId,
-    collaborativeToggleBlockWide,
     collaborativeToggleBlockAdvancedMode,
     collaborativeToggleBlockTriggerMode,
     collaborativeToggleBlockHandles,
