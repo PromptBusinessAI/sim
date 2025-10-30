@@ -20,7 +20,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'operation',
       title: 'Operation',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Get Posts', id: 'get_posts' },
         { label: 'Get Comments', id: 'get_comments' },
@@ -33,7 +32,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'credential',
       title: 'Reddit Account',
       type: 'oauth-input',
-      layout: 'full',
       provider: 'reddit',
       serviceId: 'reddit',
       requiredScopes: ['identity', 'read'],
@@ -46,7 +44,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'subreddit',
       title: 'Subreddit',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter subreddit name (without r/)',
       condition: {
         field: 'operation',
@@ -60,7 +57,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'sort',
       title: 'Sort By',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Hot', id: 'hot' },
         { label: 'New', id: 'new' },
@@ -77,7 +73,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'time',
       title: 'Time Filter (for Top sort)',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Day', id: 'day' },
         { label: 'Week', id: 'week' },
@@ -98,7 +93,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'limit',
       title: 'Max Posts',
       type: 'short-input',
-      layout: 'full',
       placeholder: '10',
       condition: {
         field: 'operation',
@@ -111,7 +105,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'postId',
       title: 'Post ID',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter post ID',
       condition: {
         field: 'operation',
@@ -123,7 +116,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'commentSort',
       title: 'Sort Comments By',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Confidence', id: 'confidence' },
         { label: 'Top', id: 'top' },
@@ -142,7 +134,6 @@ export const RedditBlock: BlockConfig<RedditResponse> = {
       id: 'commentLimit',
       title: 'Number of Comments',
       type: 'short-input',
-      layout: 'full',
       placeholder: '50',
       condition: {
         field: 'operation',

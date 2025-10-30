@@ -18,7 +18,6 @@ export const FirecrawlBlock: BlockConfig<FirecrawlResponse> = {
       id: 'operation',
       title: 'Operation',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Scrape', id: 'scrape' },
         { label: 'Search', id: 'search' },
@@ -30,7 +29,6 @@ export const FirecrawlBlock: BlockConfig<FirecrawlResponse> = {
       id: 'url',
       title: 'Website URL',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter the website URL',
       condition: {
         field: 'operation',
@@ -42,7 +40,6 @@ export const FirecrawlBlock: BlockConfig<FirecrawlResponse> = {
       id: 'onlyMainContent',
       title: 'Only Main Content',
       type: 'switch',
-      layout: 'half',
       condition: {
         field: 'operation',
         value: 'scrape',
@@ -52,7 +49,6 @@ export const FirecrawlBlock: BlockConfig<FirecrawlResponse> = {
       id: 'limit',
       title: 'Page Limit',
       type: 'short-input',
-      layout: 'half',
       placeholder: '100',
       condition: {
         field: 'operation',
@@ -63,7 +59,6 @@ export const FirecrawlBlock: BlockConfig<FirecrawlResponse> = {
       id: 'query',
       title: 'Search Query',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter the search query',
       condition: {
         field: 'operation',
@@ -75,7 +70,6 @@ export const FirecrawlBlock: BlockConfig<FirecrawlResponse> = {
       id: 'apiKey',
       title: 'API Key',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter your Firecrawl API key',
       password: true,
       required: true,

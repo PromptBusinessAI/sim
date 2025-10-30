@@ -18,7 +18,6 @@ export const LinkupBlock: BlockConfig<LinkupSearchToolResponse> = {
       id: 'q',
       title: 'Search Query',
       type: 'long-input',
-      layout: 'full',
       placeholder: 'Enter your search query',
       required: true,
     },
@@ -26,7 +25,6 @@ export const LinkupBlock: BlockConfig<LinkupSearchToolResponse> = {
       id: 'outputType',
       title: 'Output Type',
       type: 'dropdown',
-      layout: 'half',
       options: [
         { label: 'Answer', id: 'sourcedAnswer' },
         { label: 'Search', id: 'searchResults' },
@@ -37,7 +35,6 @@ export const LinkupBlock: BlockConfig<LinkupSearchToolResponse> = {
       id: 'depth',
       title: 'Search Depth',
       type: 'dropdown',
-      layout: 'half',
       options: [
         { label: 'Standard', id: 'standard' },
         { label: 'Deep', id: 'deep' },
@@ -47,7 +44,6 @@ export const LinkupBlock: BlockConfig<LinkupSearchToolResponse> = {
       id: 'apiKey',
       title: 'API Key',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter your Linkup API key',
       password: true,
       required: true,

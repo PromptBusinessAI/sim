@@ -17,7 +17,6 @@ export const JinaBlock: BlockConfig<ReadUrlResponse> = {
       id: 'url',
       title: 'URL',
       type: 'short-input',
-      layout: 'full',
       required: true,
       placeholder: 'Enter URL to extract content from',
     },
@@ -25,7 +24,6 @@ export const JinaBlock: BlockConfig<ReadUrlResponse> = {
       id: 'options',
       title: 'Options',
       type: 'checkbox-list',
-      layout: 'full',
       options: [
         { label: 'Use Reader LM v2', id: 'useReaderLMv2' },
         { label: 'Gather Links', id: 'gatherLinks' },
@@ -36,7 +34,6 @@ export const JinaBlock: BlockConfig<ReadUrlResponse> = {
       id: 'apiKey',
       title: 'API Key',
       type: 'short-input',
-      layout: 'full',
       required: true,
       placeholder: 'Enter your Jina API key',
       password: true,

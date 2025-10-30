@@ -1,8 +1,8 @@
 'use client'
 
 import { AlertTriangle, RefreshCw } from 'lucide-react'
+import { Tooltip } from '@/components/emcn'
 import { Button } from '@/components/ui/button'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { useUserPermissionsContext } from '@/app/workspace/[workspaceId]/providers/workspace-permissions-provider'
 
 interface ConnectionStatusProps {
@@ -47,8 +47,8 @@ export function ConnectionStatus({ isConnected, hasOperationError }: ConnectionS
           </span>
         </div>
       </div>
-      <Tooltip>
-        <TooltipTrigger asChild>
+      <Tooltip.Root>
+        <Tooltip.Trigger asChild>
           <Button
             onClick={handleRefresh}
             variant='ghost'
@@ -57,9 +57,9 @@ export function ConnectionStatus({ isConnected, hasOperationError }: ConnectionS
           >
             <RefreshCw className='h-4 w-4' />
           </Button>
-        </TooltipTrigger>
-        <TooltipContent className='z-[9999]'>Refresh page to continue editing</TooltipContent>
-      </Tooltip>
+        </Tooltip.Trigger>
+        <Tooltip.Content className='z-[9999]'>Refresh page to continue editing</Tooltip.Content>
+      </Tooltip.Root>
     </div>
   )
 }

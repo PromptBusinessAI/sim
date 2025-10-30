@@ -21,7 +21,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'operation',
       title: 'Operation',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Send Message', id: 'send' },
         { label: 'Create Canvas', id: 'canvas' },
@@ -33,7 +32,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'authMethod',
       title: 'Authentication Method',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Sim Bot', id: 'oauth' },
         { label: 'Custom Bot', id: 'bot_token' },
@@ -45,7 +43,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'credential',
       title: 'Slack Account',
       type: 'oauth-input',
-      layout: 'full',
       provider: 'slack',
       serviceId: 'slack',
       requiredScopes: [
@@ -69,7 +66,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'botToken',
       title: 'Bot Token',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter your Slack bot token (xoxb-...)',
       password: true,
       condition: {
@@ -81,7 +77,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'channel',
       title: 'Channel',
       type: 'channel-selector',
-      layout: 'full',
       canonicalParamId: 'channel',
       provider: 'slack',
       placeholder: 'Select Slack channel',
@@ -93,7 +88,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'manualChannel',
       title: 'Channel ID',
       type: 'short-input',
-      layout: 'full',
       canonicalParamId: 'channel',
       placeholder: 'Enter Slack channel ID (e.g., C1234567890)',
       mode: 'advanced',
@@ -102,7 +96,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'text',
       title: 'Message',
       type: 'long-input',
-      layout: 'full',
       placeholder: 'Enter your message (supports Slack mrkdwn)',
       condition: {
         field: 'operation',
@@ -115,7 +108,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'attachmentFiles',
       title: 'Attachments',
       type: 'file-upload',
-      layout: 'full',
       canonicalParamId: 'files',
       placeholder: 'Upload files to attach',
       condition: { field: 'operation', value: 'send' },
@@ -128,7 +120,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'files',
       title: 'File Attachments',
       type: 'short-input',
-      layout: 'full',
       canonicalParamId: 'files',
       placeholder: 'Reference files from previous blocks',
       condition: { field: 'operation', value: 'send' },
@@ -140,7 +131,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'title',
       title: 'Canvas Title',
       type: 'short-input',
-      layout: 'full',
       placeholder: 'Enter canvas title',
       condition: {
         field: 'operation',
@@ -152,7 +142,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'content',
       title: 'Canvas Content',
       type: 'long-input',
-      layout: 'full',
       placeholder: 'Enter canvas content (markdown supported)',
       condition: {
         field: 'operation',
@@ -165,7 +154,6 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'limit',
       title: 'Message Limit',
       type: 'short-input',
-      layout: 'half',
       placeholder: '15',
       condition: {
         field: 'operation',
@@ -176,14 +164,24 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
       id: 'oldest',
       title: 'Oldest Timestamp',
       type: 'short-input',
-      layout: 'half',
       placeholder: 'ISO 8601 timestamp',
       condition: {
         field: 'operation',
         value: 'read',
       },
     },
+<<<<<<< HEAD
     ...getTrigger('slack_webhook').subBlocks,
+=======
+    // TRIGGER MODE: Trigger configuration (only shown when trigger mode is active)
+    {
+      id: 'triggerConfig',
+      title: 'Trigger Configuration',
+      type: 'trigger-config',
+      triggerProvider: 'slack',
+      availableTriggers: ['slack_webhook'],
+    },
+>>>>>>> 3ab1f210c (feat: emcn, editor)
   ],
   tools: {
     access: ['slack_message', 'slack_canvas', 'slack_message_reader'],

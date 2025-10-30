@@ -27,14 +27,12 @@ export const ScheduleBlock: BlockConfig = {
       id: 'scheduleConfig',
       title: 'Schedule Status',
       type: 'schedule-config',
-      layout: 'full',
     },
     // Hidden fields for schedule configuration (used by the modal only)
     {
       id: 'scheduleType',
       title: 'Frequency',
       type: 'dropdown',
-      layout: 'full',
       options: [
         { label: 'Every X Minutes', id: 'minutes' },
         { label: 'Hourly', id: 'hourly' },
