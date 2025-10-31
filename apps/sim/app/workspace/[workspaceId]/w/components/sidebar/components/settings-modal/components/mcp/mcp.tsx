@@ -307,7 +307,7 @@ export function MCP() {
       </div>
 
       {/* Scrollable Content */}
-      <div className='scrollbar-thin scrollbar-thumb-muted scrollbar-track-transparent min-h-0 flex-1 overflow-y-auto px-6'>
+      <div className='min-h-0 flex-1 overflow-y-auto px-6'>
         <div className='h-full space-y-4 py-2'>
           {/* Server List */}
           {serversLoading ? (
