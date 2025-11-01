@@ -189,18 +189,7 @@ export const OutlookBlock: BlockConfig<OutlookResponse> = {
       type: 'switch',
       condition: { field: 'operation', value: 'read_outlook' },
     },
-<<<<<<< HEAD
     ...getTrigger('outlook_poller').subBlocks,
-=======
-    // TRIGGER MODE: Trigger configuration (only shown when trigger mode is active)
-    {
-      id: 'triggerConfig',
-      title: 'Trigger Configuration',
-      type: 'trigger-config',
-      triggerProvider: 'outlook',
-      availableTriggers: ['outlook_poller'],
-    },
->>>>>>> 3ab1f210c (feat: emcn, editor)
   ],
   tools: {
     access: ['outlook_send', 'outlook_draft', 'outlook_read', 'outlook_forward'],

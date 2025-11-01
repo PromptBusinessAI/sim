@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Copy, Wand2, Check } from 'lucide-react'
+import { Check, Copy, Wand2 } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { useReactFlow } from 'reactflow'
 import { Input } from '@/components/emcn/components/input/input'
@@ -19,23 +19,52 @@ import { useWebhookManagement } from '@/hooks/use-webhook-management'
 
 const logger = createLogger('ShortInput')
 
+/**
+ * Props for the ShortInput component
+ */
 interface ShortInputProps {
+  /** Placeholder text to display when empty */
   placeholder?: string
+  /** Whether to mask the input as a password field */
   password?: boolean
+  /** Unique identifier for the block */
   blockId: string
+  /** Unique identifier for the sub-block */
   subBlockId: string
+  /** Whether a connection is being dragged */
   isConnecting: boolean
+  /** Configuration object for the sub-block */
   config: SubBlockConfig
+  /** Controlled value from parent */
   value?: string
+  /** Callback when value changes */
   onChange?: (value: string) => void
+  /** Whether component is in preview mode */
   isPreview?: boolean
+  /** Value to display in preview mode */
   previewValue?: string | null
+  /** Whether the input is disabled */
   disabled?: boolean
+  /** Whether the input is read-only */
   readOnly?: boolean
+  /** Whether to show a copy button */
   showCopyButton?: boolean
+  /** Whether to use webhook URL as value */
   useWebhookUrl?: boolean
 }
 
+/**
+ * Single-line text input component with advanced features
+ *
+ * @remarks
+ * - Supports AI-powered content generation via Wand functionality
+ * - Auto-detects API key fields and provides environment variable suggestions
+ * - Handles drag-and-drop for connections and variable references
+ * - Provides environment variable and tag autocomplete
+ * - Password masking with reveal on focus
+ * - Copy to clipboard functionality
+ * - Integrates with ReactFlow for zoom control
+ */
 export function ShortInput({
   blockId,
   subBlockId,
@@ -59,13 +88,12 @@ export function ShortInput({
   const [showTags, setShowTags] = useState(false)
   const [copied, setCopied] = useState(false)
 
-  const webhookManagement = useWebhookUrl
-    ? useWebhookManagement({
-        blockId,
-        triggerId: undefined,
-        isPreview,
-      })
-    : null
+  // Always call the hook - hooks must be called unconditionally
+  const webhookManagement = useWebhookManagement({
+    blockId,
+    triggerId: undefined,
+    isPreview,
+  })
 
   // Wand functionality - always call the hook unconditionally
   const wandHook = useWand({
@@ -117,8 +145,9 @@ export function ShortInput({
   const baseValue = isPreview ? previewValue : propValue !== undefined ? propValue : storeValue
 
   // During streaming, use local content; otherwise use base value
-    const effectiveValue =
-    useWebhookUrl && webhookManagement?.webhookUrl ? webhookManagement.webhookUrl : baseValue
+  // Only use webhook URL when useWebhookUrl flag is true
+  const effectiveValue =
+    useWebhookUrl && webhookManagement.webhookUrl ? webhookManagement.webhookUrl : baseValue
 
   const value = wandHook?.isStreaming ? localContent : effectiveValue
 
@@ -141,7 +170,7 @@ export function ShortInput({
     }
   }, [localContent, wandHook.isStreaming, isPreview, disabled, setStoreValue])
 
-  // Check if this input is API key related
+  // Check if this input is API key related - memoized to prevent recalculation
   const isApiKeyField = useMemo(() => {
     const normalizedId = config?.id?.replace(/\s+/g, '').toLowerCase() || ''
     const normalizedTitle = config?.title?.replace(/\s+/g, '').toLowerCase() || ''
@@ -400,14 +429,14 @@ export function ShortInput({
   /**
    * Handles copying the value to the clipboard.
    */
-   const handleCopy = () => {
-    const textToCopy = useWebhookUrl ? webhookManagement?.webhookUrl : value?.toString()
+  const handleCopy = useCallback(() => {
+    const textToCopy = useWebhookUrl ? webhookManagement.webhookUrl : value?.toString()
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy)
       setCopied(true)
       setTimeout(() => setCopied(false), 2000)
     }
-  }
+  }, [useWebhookUrl, webhookManagement.webhookUrl, value])
 
   // Handle key combinations
   const handleKeyDown = useCallback(

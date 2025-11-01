@@ -170,18 +170,7 @@ export const SlackBlock: BlockConfig<SlackResponse> = {
         value: 'read',
       },
     },
-<<<<<<< HEAD
     ...getTrigger('slack_webhook').subBlocks,
-=======
-    // TRIGGER MODE: Trigger configuration (only shown when trigger mode is active)
-    {
-      id: 'triggerConfig',
-      title: 'Trigger Configuration',
-      type: 'trigger-config',
-      triggerProvider: 'slack',
-      availableTriggers: ['slack_webhook'],
-    },
->>>>>>> 3ab1f210c (feat: emcn, editor)
   ],
   tools: {
     access: ['slack_message', 'slack_canvas', 'slack_message_reader'],

@@ -35,12 +35,12 @@ import {
   SliderInput,
   Switch,
   Table,
+  Text,
   TimeInput,
   ToolInput,
+  TriggerSave,
   VariablesInput,
   WebhookConfig,
-  Text,
-  TriggerSave
 } from './components'
 
 /**
@@ -156,7 +156,11 @@ function SubBlockComponent({
     setIsValidJson(isValid)
   }
 
-  const previewValue = getPreviewValue(config, isPreview, subBlockValues) as string | string[] | null | undefined
+  const previewValue = getPreviewValue(config, isPreview, subBlockValues) as
+    | string
+    | string[]
+    | null
+    | undefined
   const isDisabled = disabled || isPreview
 
   /**
@@ -625,29 +629,28 @@ function SubBlockComponent({
           />
         )
 
-      
-        case 'text':
-          return (
-            <Text
-              blockId={blockId}
-              subBlockId={config.id}
-              content={
-                typeof config.value === 'function'
-                  ? config.value(subBlockValues || {})
-                  : (config.defaultValue as string) || ''
-              }
-            />
-          )
-        case 'trigger-save':
-          return (
-            <TriggerSave
-              blockId={blockId}
-              subBlockId={config.id}
-              triggerId={config.triggerId}
-              isPreview={isPreview}
-              disabled={disabled}
-            />
-          )
+      case 'text':
+        return (
+          <Text
+            blockId={blockId}
+            subBlockId={config.id}
+            content={
+              typeof config.value === 'function'
+                ? config.value(subBlockValues || {})
+                : (config.defaultValue as string) || ''
+            }
+          />
+        )
+      case 'trigger-save':
+        return (
+          <TriggerSave
+            blockId={blockId}
+            subBlockId={config.id}
+            triggerId={config.triggerId}
+            isPreview={isPreview}
+            disabled={disabled}
+          />
+        )
 
       default:
         return <div>Unknown input type: {config.type}</div>
