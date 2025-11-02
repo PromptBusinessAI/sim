@@ -231,7 +231,6 @@ export async function verifyProviderAuth(
   rawBody: string,
   requestId: string
 ): Promise<NextResponse | null> {
-  // Fetch and decrypt environment variables
   let decryptedEnvVars: Record<string, string> = {}
   try {
     const { getEffectiveDecryptedEnv } = await import('@/lib/environment/utils')
@@ -243,7 +242,6 @@ export async function verifyProviderAuth(
     logger.error(`[${requestId}] Failed to fetch environment variables`, { error })
   }
 
-  // Resolve any {{VARIABLE}} references in providerConfig
   const rawProviderConfig = (foundWebhook.providerConfig as Record<string, any>) || {}
   const providerConfig = resolveProviderConfigEnvVars(rawProviderConfig, decryptedEnvVars)
 

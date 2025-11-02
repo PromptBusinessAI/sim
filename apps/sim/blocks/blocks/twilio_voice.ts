@@ -253,14 +253,11 @@ export const TwilioVoiceBlock: BlockConfig<ToolResponse> = {
 
         const baseParams = { ...rest }
 
-        // Convert timeout string to number for make_call
         if (operation === 'make_call' && timeout) {
           baseParams.timeout = Number.parseInt(timeout, 10)
         }
 
-        // Convert record to proper boolean for make_call
         if (operation === 'make_call' && record !== undefined && record !== null) {
-          // Handle various input types: boolean, string, number
           if (typeof record === 'string') {
             baseParams.record = record.toLowerCase() === 'true' || record === '1'
           } else if (typeof record === 'number') {
@@ -270,7 +267,6 @@ export const TwilioVoiceBlock: BlockConfig<ToolResponse> = {
           }
         }
 
-        // Map list_calls specific fields
         if (operation === 'list_calls') {
           if (listTo) baseParams.to = listTo
           if (listFrom) baseParams.from = listFrom
