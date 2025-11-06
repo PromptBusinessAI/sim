@@ -54,7 +54,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 ARG NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ENV NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
 
-RUN bun run build
+RUN turbo run build --filter='!docs'
 
 # ========================================
 # Runner Stage: Run the actual app
@@ -63,8 +63,8 @@ RUN bun run build
 FROM base AS runner
 WORKDIR /app
 
-# Install Python and dependencies for guardrails PII detection
-RUN apk add --no-cache python3 py3-pip bash
+# Install Python and dependencies for guardrails PII detection, plus wget for healthchecks
+RUN apk add --no-cache python3 py3-pip bash wget
 
 ENV NODE_ENV=production
 

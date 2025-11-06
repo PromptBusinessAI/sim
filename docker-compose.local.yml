@@ -13,13 +13,25 @@ services:
       - NODE_ENV=development
       - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-simstudio}
       - BETTER_AUTH_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
-      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      - NEXT_PUBLIC_APP_URL=https://shopper-multimedia-zus-florida.trycloudflare.com
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-your_auth_secret_here}
-      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-your_encryption_key_here}
+      - ENCRYPTION_KEY=${ENCRYPTION_KEY:-5ae90e91489495cbe4876905e4498ec5dacca707fe325c0952d878f7dd3397b2}
+      - INTERNAL_API_SECRET=${INTERNAL_API_SECRET:-replace-with-a-32-character-minimum-secret-here}
       - COPILOT_API_KEY=${COPILOT_API_KEY}
-      - SIM_AGENT_API_URL=${SIM_AGENT_API_URL}
+      - SIM_AGENT_API_URL=${SIM_AGENT_API_URL:-https://copilot.sim.ai}
       - OLLAMA_URL=${OLLAMA_URL:-http://localhost:11434}
+      - OLLAMA_API_KEY=${OLLAMA_API_KEY:-empty}
+      - SOCKET_SERVER_URL=${SOCKET_SERVER_URL:-http://localhost:3002}
       - NEXT_PUBLIC_SOCKET_URL=${NEXT_PUBLIC_SOCKET_URL:-http://localhost:3002}
+      # Proxy configuration for HTTPS requests (e.g., Telegram webhook)
+      - HTTP_PROXY=${HTTP_PROXY:-}
+      - HTTPS_PROXY=${HTTPS_PROXY:-}
+      - http_proxy=${http_proxy:-}
+      - https_proxy=${https_proxy:-}
+      - NO_PROXY=${NO_PROXY:-localhost,127.0.0.1,db,realtime}
+      - no_proxy=${no_proxy:-localhost,127.0.0.1,db,realtime}
+      # TLS configuration (set to '0' only if using self-signed certificates in development)
+      - NODE_TLS_REJECT_UNAUTHORIZED=${NODE_TLS_REJECT_UNAUTHORIZED:-1}
     depends_on:
       db:
         condition: service_healthy
@@ -40,9 +52,19 @@ services:
       dockerfile: docker/realtime.Dockerfile
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-simstudio}
-      - NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL:-http://localhost:3000}
+      - NEXT_PUBLIC_APP_URL=https://shopper-multimedia-zus-florida.trycloudflare.com
       - BETTER_AUTH_URL=${BETTER_AUTH_URL:-http://localhost:3000}
       - BETTER_AUTH_SECRET=${BETTER_AUTH_SECRET:-your_auth_secret_here}
+      - INTERNAL_API_SECRET=${INTERNAL_API_SECRET:-replace-with-a-32-character-minimum-secret-here}
+      # Proxy configuration for HTTPS requests
+      - HTTP_PROXY=${HTTP_PROXY:-}
+      - HTTPS_PROXY=${HTTPS_PROXY:-}
+      - http_proxy=${http_proxy:-}
+      - https_proxy=${https_proxy:-}
+      - NO_PROXY=${NO_PROXY:-localhost,127.0.0.1,db,simstudio}
+      - no_proxy=${no_proxy:-localhost,127.0.0.1,db,simstudio}
+      # TLS configuration
+      - NODE_TLS_REJECT_UNAUTHORIZED=${NODE_TLS_REJECT_UNAUTHORIZED:-1}
     depends_on:
       db:
         condition: service_healthy
