@@ -18,7 +18,6 @@ import { createLogger } from '@/lib/logs/console/logger'
 import type { OAuthProvider, OAuthService } from '@/lib/oauth/oauth'
 import { cn } from '@/lib/utils'
 import {
-  ChannelSelectorInput,
   CheckboxList,
   Code,
   ComboBox,
@@ -31,6 +30,7 @@ import {
   Table,
   TimeInput,
 } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/components'
+import { ChannelSelectorInput } from '@/app/workspace/[workspaceId]/w/[workflowId]/components/workflow-block/components/sub-block/components/channel-selector/channel-selector-input'
 import {
   type CustomTool,
   CustomToolModal,
